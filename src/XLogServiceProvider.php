@@ -4,7 +4,7 @@ namespace RummyKhan\XLog;
 
 use Illuminate\Support\ServiceProvider;
 
-class LogXServiceProvider extends ServiceProvider {
+class XLogServiceProvider extends ServiceProvider {
 
     /**
      * Indicates if loading of the provider is deferred.
