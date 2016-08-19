@@ -21,7 +21,7 @@ Add these two service provider in `app/config/app.php`:
 
 ```php
 \Torann\GeoIP\GeoIPServiceProvider::class,
-RummyKhan\XLog\DarajServiceProvider::class,
+RummyKhan\XLog\XLogServiceProvider::class,
 ```
 
 Publish Configuration
