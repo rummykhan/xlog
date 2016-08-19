@@ -20,6 +20,11 @@ class XLogServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
+
+        if (! $this->app->routesAreCached()) {
+            require __DIR__.'/Http/routes.php';
+        }
+
         $this->publishes([
             __DIR__ . '/config/xlog.php' => config_path('xlog.php')
         ], 'config');
@@ -27,6 +32,13 @@ class XLogServiceProvider extends ServiceProvider {
         $this->publishes([
             __DIR__ . '/migrations/' => base_path('/database/migrations')
         ], 'migrations');
+
+
+        $this->loadViewsFrom(__DIR__.'/views', 'xlog');
+
+        $this->publishes([
+            __DIR__.'/views' => resource_path('views/vendor/xlog'),
+        ]);
     }
 
     /**
