@@ -1,6 +1,6 @@
 {
-    "name": "rummykhan/daraj",
-    "description": "Log requests coming to your website.",
+    "name": "rummykhan/xlog",
+    "description": "A PHP Laravel package to log all the requests coming to your website",
     "type": "library",
     "require": {
         "php": ">=5.3.0",
