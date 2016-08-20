@@ -58,8 +58,8 @@ Create Log Table using command:
 php artisan migrate
 ```
 
-Add Service Providers
----------------------
+Add Middleware
+--------------
 
 Add `LogginMiddleWare` to your `app\Http\Kernel.php` as a global middleware:
 
