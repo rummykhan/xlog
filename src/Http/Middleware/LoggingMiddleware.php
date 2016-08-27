@@ -24,14 +24,14 @@ class LoggingMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        $response = $next($request);
+
+        $this->logRequest($request, $response);
+
+        return $response;
     }
 
-    /**
-     * @param $request
-     * @param $response
-     */
-    public function terminate($request, $response)
+    private function logRequest($request, $response)
     {
         if ( in_array(env('APP_ENV'), Config::get('xlog.ignore_environments')) )
             return;
