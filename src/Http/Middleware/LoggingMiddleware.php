@@ -3,6 +3,8 @@
 namespace RummyKhan\XLog\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +17,9 @@ use Jenssegers\Agent\Agent;
 
 class LoggingMiddleware
 {
+
     private $log_info;
+
     /**
      * Handle an incoming request.
      *
@@ -25,18 +29,30 @@ class LoggingMiddleware
      */
     public function handle($request, Closure $next)
     {
+        /**
+         * Breakdown the access log and response, because there are few packages where
+         * package itself handle the response e.g. Maatwebsite Excel, in that case the
+         * log code will never execute.
+         */
+
+        // check if current app environments not exist in ignore_environments in xlog config.
         if ( !in_array(env('APP_ENV'), Config::get('xlog.ignore_environments')) )
             $this->logAccess($request);
 
         $response = $next($request);
 
+        // check if current app environments not exist in ignore_environments in xlog config.
         if ( !in_array(env('APP_ENV'), Config::get('xlog.ignore_environments')) )
             $this->logResponse($response);
 
         return $response;
     }
 
-    private function logAccess($request)
+
+    /**
+     * @param Request $request
+     */
+    private function logAccess(Request $request)
     {
         $this->log_info                       = new Log();
         $this->log_info['user_type']          = 'guest';
@@ -51,7 +67,7 @@ class LoggingMiddleware
         $this->log_info['url']                = $request->url();
 
         $this->log_info['session_id']         = Session::getId();
-        $this->log_info['ip']                 = Helper::getPublicIp($request->ip(), Helper::tryGetValue($_SERVER, 'HTTP_X_FORWARDED_FOR'));
+        $this->log_info['ip']                 = Helper::getPublicIp( $request->ip(), Helper::tryGetValue($_SERVER, 'HTTP_X_FORWARDED_FOR') );
 
         $agent = new Agent();
 
@@ -60,13 +76,13 @@ class LoggingMiddleware
 
         $platform = '';
         if ( $agent->isRobot() )
-            $platform                   = $agent->robot();
+            $platform                         = $agent->robot();
 
         if ( $agent->isDesktop() )
-            $platform                   = $agent->platform();
+            $platform                         = $agent->platform();
 
         if ( $agent->isPhone() )
-            $platform                   = $agent->device();
+            $platform                         = $agent->device();
 
         $this->log_info['os']                 =   $platform;
         $this->log_info['os_version']         =   $agent->version($platform);
@@ -85,7 +101,11 @@ class LoggingMiddleware
         $this->log_info->save();
     }
 
-    private function logResponse($response)
+
+    /**
+     * @param Response $response
+     */
+    private function logResponse(Response $response)
     {
         $this->log_info['title']              = Helper::getTitle($response->getContent());
         $this->log_info['response_code']      = $response->getStatusCode();
