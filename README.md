@@ -64,7 +64,7 @@ Add Middleware
 Add `LogginMiddleWare` to your `app\Http\Kernel.php` as a global middleware:
 
 ```php
-\RummyKhan\XLog\Http\Middleware\LoggingMiddleware::class,
+\RummyKhan\XLog\Http\Middleware\XLogMiddleware::class,
 ```
 
 
