@@ -8,7 +8,7 @@
                     <div class="panel-heading">
                         Website Requests Logs
                     </div>
-                    <table class="table table-striped table-responsive">
+                    <table class="table table-striped table-responsive table-hover">
                         <thead>
                         <tr>
                             <th>Title</th>

@@ -3,10 +3,16 @@
 namespace RummyKhan\XLog\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Config;
 use RummyKhan\XLog\Models\Log;
 
 class XLogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(Config::get('xlog.middleware'));
+    }
+
     public function index()
     {
         $logs = Log::paginate(50);

@@ -4,7 +4,6 @@ namespace RummyKhan\XLog\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
@@ -12,10 +11,11 @@ use Illuminate\Support\Facades\Session;
 
 use RummyKhan\XLog\Helpers\Helper;
 use RummyKhan\XLog\Models\Log;
+use Symfony\Component\HttpFoundation\Response;
 use Torann\GeoIP\GeoIPFacade;
 use Jenssegers\Agent\Agent;
 
-class LoggingMiddleware
+class XLogMiddleware
 {
 
     private $log_info;
