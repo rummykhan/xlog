@@ -87,7 +87,7 @@ class LoggingMiddleware
         $this->log_info['os']                 =   $platform;
         $this->log_info['os_version']         =   $agent->version($platform);
 
-        $location                       = GeoIPFacade::getLocation($this->log_info['ip']);
+        $location                           = GeoIPFacade::getLocation($this->log_info['ip']);
 
         if(isset($location['country']))
             $this->log_info['country']        = $location['country'];
