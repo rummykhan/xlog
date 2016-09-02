@@ -68,6 +68,6 @@ Add `LogginMiddleWare` to your `app\Http\Kernel.php` as a global middleware:
 ```
 
 
-## License
+## MIT Liscense
 
 Laravel rummykhan/xlog is licensed under [The MIT License (MIT)](LICENSE).
