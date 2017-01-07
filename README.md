@@ -61,7 +61,7 @@ php artisan migrate
 Add Middleware
 --------------
 
-Add `LogginMiddleWare` to your `app\Http\Kernel.php` as a global middleware:
+Add `LogginMiddleWare` to your `app\Http\Kernel.php` as a web middleware group:
 
 ```php
 \RummyKhan\XLog\Http\Middleware\XLogMiddleware::class,
