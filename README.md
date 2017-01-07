@@ -61,7 +61,7 @@ In `xlog.php` you may specify your `connection` as string. This connection will 
 ```php
 'connection' => env('DB_CONNECTION')
 ```
-Supported connection types are (sqlite, mysql, pgsql, mongodb).
+Supported database types are (sqlite, mysql, pgsql, mongodb).
 
 #### DB Table
 In `xlog.php` you may specify the table_name for you logs.
