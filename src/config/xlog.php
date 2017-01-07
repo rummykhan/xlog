@@ -25,9 +25,9 @@ return array(
     |
     */
     'routes' => [
-        'index'     => '/admin/logs',       // HTTP Method is GET
-        'detail'    => '/admin/logs/{id}',  // HTTP Method is GET
-        'delete'    => '/admin/logs/{id}'  // HTTP Method is DELETE
+        'index'     => [ 'route' => '/admin/logs',      'action' => 'XLogController@index'],        // HTTP Method is GET
+        'detail'    => [ 'route' => '/admin/logs/{id}', 'action' => 'XLogController@detail'],       // HTTP Method is GET
+        'delete'    => [ 'route' => '/admin/logs/{id}', 'action' => 'XLogController@delete']        // HTTP Method is DELETE
     ],
 
     /*
