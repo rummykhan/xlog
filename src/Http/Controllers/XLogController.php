@@ -15,7 +15,7 @@ class XLogController extends Controller
     
     public function index()
     {
-        $logs = Log::paginate(15);
+        $logs = Log::orderBy('created_at', 'DESC')->paginate(15);
 
         return view('xlog::index', compact('logs'));
     }
