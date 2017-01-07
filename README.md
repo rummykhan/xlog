@@ -47,7 +47,7 @@ php artisan geoip:update
 
 #####The `php artisan vendor:publish` will publish `Log table migration` into migrations folder, `geoip.php` and `xlog.php` in config folder of you laravel installation.
 
-#### Configure Logging Environments
+#### Logging Environments
 
 In `xlog.php` you can specify your `igonore_environments` as an array, In these environment it will not log any request or response e.g.
 
@@ -55,7 +55,7 @@ In `xlog.php` you can specify your `igonore_environments` as an array, In these 
 'ignore_environments' => ['local', 'test'],
 ```
 
-#### Configure Logging Connection
+#### DB Connection
 
 In `xlog.php` you can specify your `connection` as string. This connection will be used to save the logs. (By default it uses application connection)
 ```php
@@ -63,7 +63,13 @@ In `xlog.php` you can specify your `connection` as string. This connection will 
 ```
 Supported connection types are (sqlite, mysql, pgsql, mongodb).
 
-#### Configure Routes
+#### DB Table
+In `xlog.php` you can specify the table_name for you logs.
+```php
+'table' => 'logs'
+```
+
+#### Log Display Routes
 In `xlog.php` you can specify your `routes`. For now there are only three routes. 
     1. Index: where you can see the logs in tabular format using laravel pagination.
     2. Detail: Where you can see the logs detail.
@@ -79,7 +85,7 @@ In `xlog.php` you can specify your `routes`. For now there are only three routes
 ```
 When changing routes please dont change the wildcard {id} from the routes.
 
-#### Configure Middleware
+#### Log Middleware
 In `xlog.php` you can specify the middleware for you log routes. By default middleware is set to auth.
 ```php
 'middleware' => ['auth']

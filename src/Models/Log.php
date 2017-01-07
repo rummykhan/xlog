@@ -26,6 +26,7 @@ if( config('xlog.connection') === 'mongodb' && class_exists('Jenssegers\Mongodb\
         {
             parent::__construct($attributes);
             $this->connection = config('xlog.connection');
+            $this->collection = config('xlog.table');
         }
     }
 
@@ -33,7 +34,7 @@ if( config('xlog.connection') === 'mongodb' && class_exists('Jenssegers\Mongodb\
     class Log extends \Illuminate\Database\Eloquent\Model
     {
 
-        protected $collection = 'logs';
+        protected $table = 'logs';
 
         protected $fillable = [
             'id', 'title', 'url', 'response_code', 'session_id', 'ip', 'country', 'city',
@@ -55,6 +56,7 @@ if( config('xlog.connection') === 'mongodb' && class_exists('Jenssegers\Mongodb\
             parent::__construct($attributes);
 
             $this->connection = config('xlog.connection');
+            $this->collection = config('xlog.table');
         }
     }
 }

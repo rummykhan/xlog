@@ -54,5 +54,15 @@ return array(
     | supported connection are (sqlite, mysql, pgsql, mongodb ), default connection is mysql.
     |
     */
-    'connection' => env('DB_CONNECTION')
+    'connection' => env('DB_CONNECTION'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | X-log Database Table / Collection
+    |--------------------------------------------------------------------------
+    |
+    | Here you can specify your database table for logs.
+    |
+    */
+    'table' => 'logs'
 );
