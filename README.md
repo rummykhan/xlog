@@ -49,7 +49,7 @@ php artisan geoip:update
 
 #### Logging Environments
 
-In `xlog.php` you can specify your `igonore_environments` as an array, In these environment it will not log any request or response e.g.
+In `xlog.php` you may specify your `igonore_environments` as an array, In these environment it will not log any request or response e.g.
 
 ```php
 'ignore_environments' => ['local', 'test'],
@@ -57,25 +57,25 @@ In `xlog.php` you can specify your `igonore_environments` as an array, In these 
 
 #### DB Connection
 
-In `xlog.php` you can specify your `connection` as string. This connection will be used to save the logs. (By default it uses application connection)
+In `xlog.php` you may specify your `connection` as string. This connection will be used to save the logs. (By default it uses application connection)
 ```php
 'connection' => env('DB_CONNECTION')
 ```
 Supported connection types are (sqlite, mysql, pgsql, mongodb).
 
 #### DB Table
-In `xlog.php` you can specify the table_name for you logs.
+In `xlog.php` you may specify the table_name for you logs.
 ```php
 'table' => 'logs'
 ```
 
 #### Log Display Routes
-In `xlog.php` you can specify your `routes`. For now there are only three routes. 
+In `xlog.php` you may specify your `routes`. For now there are only three routes. 
     1. Index: where you can see the logs in tabular format using laravel pagination.
     2. Detail: Where you can see the logs detail.
     3. Delete: You can delete a log.
     
-( You can specify you own routes and controllers in case you want to. All you have to do is Call the RummyKhan\XLog\Models\Log Model to get the logs.)
+( You may specify you own routes and controllers in case you want to. All you have to do is Call the RummyKhan\XLog\Models\Log Model to get the logs.)
 ```php
 'routes' => [
     'index'     => [ 'route' => '/admin/logs',      'action' => 'XLogController@index'],        // HTTP Method is GET
