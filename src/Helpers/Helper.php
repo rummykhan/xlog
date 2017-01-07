@@ -6,6 +6,9 @@ class Helper
 {
 
     /**
+     * Get public IP from the ip and X-FORWARDED-FOR
+     * It actually compare the both ips and give you the public amongst them.
+     *
      * @param $ip
      * @param $x_forwarded_for
      * @return mixed|null
@@ -21,6 +24,8 @@ class Helper
     }
 
     /**
+     * Checks if the ip address is a valid ip address.
+     *
      * @param $ip
      * @return mixed
      */
@@ -29,6 +34,8 @@ class Helper
     }
 
     /**
+     * Checks if IP address is valid public ip address
+     *
      * @param $ip
      * @return mixed
      */
@@ -41,6 +48,8 @@ class Helper
     }
 
     /**
+     * Get client ip from X-FORWARDED-FOR header, because this is a comma separated array sometime.
+     *
      * @param $x_forwarded_for
      * @return mixed|null
      */
@@ -60,21 +69,13 @@ class Helper
     }
 
     /**
+     * Get Title from the response.
+     *
      * @param $content
      * @return string
      */
     public static function getTitle($content)
     {
         return preg_match('!<title>(.*?)</title>!i', $content, $matches) ? $matches[1] : '';
-    }
-
-    /**
-     * @param $arr
-     * @param $index
-     * @return string
-     */
-    public static function tryGetValue($arr, $index)
-    {
-        return isset($arr[$index]) ? $arr[$index] : '';
     }
 }

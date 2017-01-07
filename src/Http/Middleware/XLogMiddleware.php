@@ -67,7 +67,7 @@ class XLogMiddleware
         $this->log_info['url']                = $request->url();
 
         $this->log_info['session_id']         = Session::getId();
-        $this->log_info['ip']                 = Helper::getPublicIp( $request->ip(), Helper::tryGetValue($_SERVER, 'HTTP_X_FORWARDED_FOR') );
+        $this->log_info['ip']                 = Helper::getPublicIp( $request->ip(), array_get($_SERVER, 'HTTP_X_FORWARDED_FOR', '') );
 
         $agent = new Agent();
 

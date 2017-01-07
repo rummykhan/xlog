@@ -41,5 +41,18 @@ return array(
     | by default it is set to auth, which is out of box middleware for laravel auth system.
     |
     */
-    'middleware' => ['auth']
+    'middleware' => ['auth'],
+
+    /*
+    |--------------------------------------------------------------------------
+    | X-log Database Connection
+    |--------------------------------------------------------------------------
+    |
+    | Here you can specify your database connection for logs.
+    | e.g. your active connection for your application is mysql
+    | but for logs you want to use any other connection, you can specify your connection here.
+    | supported connection are (sqlite, mysql, pgsql, mongodb ), default connection is mysql.
+    |
+    */
+    'connection' => env('DB_CONNECTION')
 );
