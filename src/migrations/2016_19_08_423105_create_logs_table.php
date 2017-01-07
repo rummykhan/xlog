@@ -15,7 +15,6 @@ class CreateLogsTable extends Migration
             $table->increments('id');
 
             $table->string('title');
-            $table->string('page');
             $table->string('url');
             $table->string('response_code');
             $table->string('session_id');

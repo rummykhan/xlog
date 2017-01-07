@@ -2,6 +2,8 @@
 
 namespace RummyKhan\XLog\Helpers;
 
+use Illuminate\Http\Request;
+
 class Helper
 {
 
@@ -77,5 +79,59 @@ class Helper
     public static function getTitle($content)
     {
         return preg_match('!<title>(.*?)</title>!i', $content, $matches) ? $matches[1] : '';
+    }
+
+    /**
+     * Get Detail from the request.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public static function getRequestDetail(Request $request)
+    {
+        $log                        = [];
+        $log['user_type']             = 'guest';
+
+        if ( Auth::guard(null)->check() ){
+            $log['user_type']         = 'Admin';
+            $log['user_email']        =  Auth::user()->email;
+            $log['user_id']           =  Auth::user()->id;
+        }
+
+        $log['url']                   = $request->url();
+
+        $log['session_id']            = Session::getId();
+        $log['ip']                    = Helper::getPublicIp( $request->ip(), array_get($_SERVER, 'HTTP_X_FORWARDED_FOR', '') );
+
+        $agent = new Agent();
+
+        $log['browser']               = $agent->browser();
+        $log['browser_version']       = $agent->version($agent->browser());
+
+        $platform = '';
+        if ( $agent->isRobot() )
+            $platform               = $agent->robot();
+
+        if ( $agent->isDesktop() )
+            $platform               = $agent->platform();
+
+        if ( $agent->isPhone() )
+            $platform               = $agent->device();
+
+        $log['os']                    =   $platform;
+        $log['os_version']            =   $agent->version($platform);
+
+        $location                   = GeoIPFacade::getLocation($log['ip']);
+
+        if(isset($location['country']))
+            $log['country']           = $location['country'];
+
+        if(isset($location['city']))
+            $log['city']            = $location['city'];
+
+        $log['request_method']      = $request->method();
+        $log['request_params']      = json_encode($request->all());
+
+        return $log;
     }
 }
