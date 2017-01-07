@@ -42,15 +42,29 @@ Update geoip database using command:
 php artisan geoip:update
 ```
 
- Configure You application logging behavior
--------------------------------------------
+ Configure your application logging behavior
+--------------------------------------------
 
-The `php artisan vendor:publish` will publish `Log table migration` into migrations folder, `geoip.php` and `xlog.php` in config folder of you laravel installation.
-In `xlog.php` you can specify your `igonore_environments` as an array e.g.
+    #### Configure Logging Environments
+    
+    The `php artisan vendor:publish` will publish `Log table migration` into migrations folder, `geoip.php` and `xlog.php` in config folder of you laravel installation.
+    In `xlog.php` you can specify your `igonore_environments` as an array e.g.
+    
+    ```php
+    'ignore_environments' => ['local', 'test'],
+    ```
+    
+    #### Configure Logging Connection
+    
+    The `php artisan vendor:publish` will publish `xlog.php` in config folder of you laravel installation.
+    In `xlog.php` you can specify your `connection` as string. This will be the connection where xlog will save all the logs of your application.
+    
+    ```php
+    'connection' => 'mysql',
+    ```
+    By default it uses application default connection.
 
-```php
-'ignore_environments' => ['local', 'test'],
-```
+
 
 Migrate Log Table (if your connection is mysql)
 -----------------------------------------------
