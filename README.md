@@ -94,12 +94,12 @@ In `xlog.php` you may specify your `routes`. For now there are only three routes
 ( You may specify you own routes and controllers in case you want to. All you have to do is Call the RummyKhan\XLog\Models\Log Model to get the logs.)
 ```php
 'routes' => [
-    'index'     => [ 'route' => '/admin/logs',      'action' => 'XLogController@index'],        // HTTP Method is GET
-    'detail'    => [ 'route' => '/admin/logs/{id}', 'action' => 'XLogController@detail'],       // HTTP Method is GET
-    'delete'    => [ 'route' => '/admin/logs/{id}', 'action' => 'XLogController@delete']        // HTTP Method is DELETE
+    'index'  => [ 'route' => '/admin/logs',      'action' => 'XLogController@index'],        // HTTP Method is GET
+    'detail' => [ 'route' => '/admin/logs/{id}', 'action' => 'XLogController@detail'],       // HTTP Method is GET
+    'delete' => [ 'route' => '/admin/logs/{id}', 'action' => 'XLogController@delete']        // HTTP Method is DELETE
 ],
 ```
-When changing routes please dont change the wildcard `{id}` from the routes.
+When changing routes, don't change the wildcard `{id}` from the routes.
 
 #### Log Middleware
 In `xlog.php` you can specify the middleware for you log routes. By default middleware is set to auth.
