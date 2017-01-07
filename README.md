@@ -1,7 +1,7 @@
 X-Log
 =====
 
-[![Latest Stable Version](https://img.shields.io/badge/packagist-v%201.0.2-blue.svg)](https://packagist.org/packages/rummykhan/xlog)
+[![Latest Stable Version](https://img.shields.io/badge/packagist-v%202.0.0-blue.svg)](https://packagist.org/packages/rummykhan/xlog)
 
 A PHP/Laravel Package to log all the requests, with the exceptions, country and city. It will help you get insight of your visitors activiy. Built on top of `torann/geoip` and `jenssegers/agent`
 
