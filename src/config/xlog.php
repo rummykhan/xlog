@@ -11,8 +11,8 @@ return array(
     | environments it will not log the requests, e.g. local, test
     |
     */
-    'ignore_environments' => ['local'],
 
+    'ignore_environments' => [],
     /*
     |--------------------------------------------------------------------------
     | X-log Routes

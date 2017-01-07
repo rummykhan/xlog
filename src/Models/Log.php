@@ -17,8 +17,16 @@ if( config('xlog.connection') === 'mongodb' && class_exists('Jenssegers\Mongodb\
         protected $attributes = [
             'redirected_to' => null,
             'email' => null,
-            'user_id' => null
+            'user_id' => null,
+            'title' => null,
+            'response_code' => 200
         ];
+
+        public function __construct($attributes=[])
+        {
+            parent::__construct($attributes);
+            $this->connection = config('xlog.connection');
+        }
     }
 
 }else{
@@ -37,9 +45,21 @@ if( config('xlog.connection') === 'mongodb' && class_exists('Jenssegers\Mongodb\
         protected $attributes = [
             'redirected_to' => null,
             'email' => null,
-            'user_id' => null
+            'user_id' => null,
+            'title' => null,
+            'response_code' => 200
         ];
+
+        public function __construct($attributes=[])
+        {
+            parent::__construct($attributes);
+
+            $this->connection = config('xlog.connection');
+        }
     }
 }
+
+
+
 
 

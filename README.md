@@ -33,13 +33,6 @@ Publish the configuration using command:
 php artisan vendor:publish
 ```
 
-The above command will publish `Log table migration` into migrations folder, `geoip.php` and `xlog.php` in config folder of you laravel installation.
-In `xlog.php` you can specify your `igonore_environments` as an array e.g.
-
-```php
-'ignore_environments' => ['local', 'test'],
-```
-
 Update geoip database
 ---------------------
 
@@ -49,8 +42,18 @@ Update geoip database using command:
 php artisan geoip:update
 ```
 
-Migrate Log Table
------------------
+ Configure You application logging behavior
+-------------------------------------------
+
+The `php artisan vendor:publish` will publish `Log table migration` into migrations folder, `geoip.php` and `xlog.php` in config folder of you laravel installation.
+In `xlog.php` you can specify your `igonore_environments` as an array e.g.
+
+```php
+'ignore_environments' => ['local', 'test'],
+```
+
+Migrate Log Table (if your connection is mysql)
+-----------------------------------------------
 
 Create Log Table using command:
 
