@@ -2,7 +2,13 @@
 
 namespace RummyKhan\XLog\Helpers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+use Jenssegers\Agent\Agent;
+use Torann\GeoIP\GeoIPFacade;
 
 class Helper
 {
@@ -93,9 +99,9 @@ class Helper
         $log['user_type']             = 'guest';
 
         if ( Auth::guard(null)->check() ){
-            $log['user_type']         = 'Admin';
-            $log['user_email']        =  Auth::user()->email;
-            $log['user_id']           =  Auth::user()->id;
+            $user                     = Auth::user();
+            $log['email']             =  $user->email;
+            $log['user_id']           =  $user->getAuthIdentifier();
         }
 
         $log['url']                   = $request->url();
@@ -131,6 +137,34 @@ class Helper
 
         $log['request_method']      = $request->method();
         $log['request_params']      = json_encode($request->all());
+
+        return $log;
+    }
+
+
+    public static function getResponseDetail($response)
+    {
+        $log                        = [];
+        $log['title']               = Helper::getTitle($response->getContent());
+        $log['response_code']       = $response->getStatusCode();
+
+        if( isset($response->exception) && !is_null($response->exception) ) {
+            $log['exception']       = true;
+            $log['trace']           = str_replace("\n", '<br>', $response->exception->getTraceAsString());
+            $log['error_main']      = 'Error in FILE [' . $response->exception->getFile() . '] at LINE # [' . $response->exception->getLine() . ']';
+            $log['class']           = get_class($response->exception);
+            $log['message']         = $response->exception->getMessage();
+        }
+
+        $log['controller_action']   = null;
+        if( is_object( Route::getCurrentRoute() ) )
+            $log['controller_action'] = Route::getCurrentRoute()->getActionName();
+
+        $log['is_redirect']         =   false;
+        if( $response->isRedirection() ) {
+            $log['is_redirect']     =   true;
+            $log['redirected_to']   =   $response->getTargetUrl();
+        }
 
         return $log;
     }

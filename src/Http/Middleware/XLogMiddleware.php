@@ -4,16 +4,11 @@ namespace RummyKhan\XLog\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 
 use RummyKhan\XLog\Helpers\Helper;
-use RummyKhan\XLog\Models\Log;
 use Symfony\Component\HttpFoundation\Response;
-use Torann\GeoIP\GeoIPFacade;
-use Jenssegers\Agent\Agent;
 
 class XLogMiddleware
 {
@@ -50,43 +45,27 @@ class XLogMiddleware
 
 
     /**
+     * Log Access detail to Database
+     *
      * @param Request $request
+     * @return void
      */
     private function logAccess(Request $request)
     {
-        $log                        = new Log();
-        
-
-        $log->save();
+        $this->log = new \RummyKhan\XLog\Models\Log();
+        $this->log->fill(Helper::getRequestDetail($request));
+        $this->log->save();
     }
 
 
     /**
+     * Log response to database.
+     *
      * @param Response $response
+     * @return void
      */
     private function logResponse(Response $response)
     {
-        $log['title']              = Helper::getTitle($response->getContent());
-        $log['response_code']      = $response->getStatusCode();
-
-        if( isset($response->exception) && !is_null($response->exception) ) {
-            $log['exception']      = true;
-            $log['trace']          = str_replace("\n", '<br>', $response->exception->getTraceAsString());
-            $log['error_main']     = 'Error in FILE [' . $response->exception->getFile() . '] at LINE # [' . $response->exception->getLine() . ']';
-            $log['class']          = get_class($response->exception);
-            $log['message']        = $response->exception->getMessage();
-        }
-
-        $log['controller_action']  = null;
-        if( is_object( Route::getCurrentRoute() ) )
-            $log['controller_action'] = Route::getCurrentRoute()->getActionName();
-
-        $log['is_redirect']        =   false;
-        if( $response->isRedirection() ) {
-            $log['is_redirect']    =   true;
-            $log['redirected_to']  =   $response->getTargetUrl();
-        }
-
-        $log->save();
+        $this->log->update(Helper::getResponseDetail($response));
     }
 }

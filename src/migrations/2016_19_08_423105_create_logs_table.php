@@ -30,8 +30,7 @@ class CreateLogsTable extends Migration
 
             $table->string('request_method');
             $table->text('request_params');
-
-            $table->string('user_type')->nullable();
+            
             $table->string('email')->nullable();
             $table->string('user_id')->nullable();
 
