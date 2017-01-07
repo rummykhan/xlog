@@ -4,7 +4,6 @@ namespace RummyKhan\XLog\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 
 use RummyKhan\XLog\Helpers\Helper;
@@ -31,13 +30,13 @@ class XLogMiddleware
          */
 
         // check if current app environments not exist in ignore_environments in xlog config.
-        if ( !in_array(env('APP_ENV'), Config::get('xlog.ignore_environments')) )
+        if ( !in_array(env('APP_ENV'), config('xlog.ignore_environments')) )
             $this->logAccess($request);
 
         $response = $next($request);
 
         // check if current app environments not exist in ignore_environments in xlog config.
-        if ( !in_array(env('APP_ENV'), Config::get('xlog.ignore_environments')) )
+        if ( !in_array(env('APP_ENV'), config('xlog.ignore_environments')) )
             $this->logResponse($response);
 
         return $response;
