@@ -42,6 +42,22 @@ Update geoip database using command:
 php artisan geoip:update
 ```
 
+Add Middleware
+--------------
+Add `XLogMiddleWare` to your `app\Http\Kernel.php` as a web middleware group:
+
+```php
+\RummyKhan\XLog\Http\Middleware\XLogMiddleware::class,
+```
+
+Migrate Log Table ( You don't have to migrate if your database is mongodb.)
+---------------------------------------------------------------------------
+Migrate Log Table migration:
+
+```bash
+php artisan migrate
+```
+
  Configure your application logging behavior
 --------------------------------------------
 
@@ -90,23 +106,6 @@ In `xlog.php` you can specify the middleware for you log routes. By default midd
 ```php
 'middleware' => ['auth']
 ```
-
-Migrate Log Table (You don't need to migrate if your database is mongodb.)
---------------------------------------------------------------------------
-Create Log Table using command:
-
-```bash
-php artisan migrate
-```
-
-Add Middleware
---------------
-Add `LogginMiddleWare` to your `app\Http\Kernel.php` as a web middleware group:
-
-```php
-\RummyKhan\XLog\Http\Middleware\XLogMiddleware::class,
-```
-
 
 ## MIT Liscense
 Laravel rummykhan/xlog is licensed under [The MIT License (MIT)](LICENSE).
