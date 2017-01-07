@@ -87,9 +87,9 @@ In `xlog.php` you may specify the table_name for you logs.
 
 #### Log Display Routes
 In `xlog.php` you may specify your `routes`. For now there are only three routes. 
-    1. Index: where you can see the logs in tabular format using laravel pagination.
-    2. Detail: Where you can see the logs detail.
-    3. Delete: You can delete a log.
+1. Index: where you can see the logs in tabular format using laravel pagination.
+2. Detail: Where you can see the logs detail.
+3. Delete: You can delete a log.
     
 ( You may specify you own routes and controllers in case you want to. All you have to do is Call the RummyKhan\XLog\Models\Log Model to get the logs.)
 ```php
