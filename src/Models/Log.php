@@ -4,8 +4,6 @@ namespace RummyKhan\XLog\Models;
 
 class Log extends ProxyModel
 {
-    protected $table = 'logs';
-
     protected $fillable = [
         'id', 'title', 'url', 'response_code', 'session_id', 'ip', 'country', 'city',
         'browser', 'browser_version', 'os', 'os_version', 'request_method', 'request_params',
@@ -25,8 +23,13 @@ class Log extends ProxyModel
     {
         parent::__construct($attributes);
 
-        $this->connection = config('xlog.connection');
-        $this->collection = config('xlog.table');
+        $this->connection = config('xlog.connection') ?: env('DB_CONNECTION');
+
+        if( config('xlog.connection') === 'mongodb' ) {
+            $this->collection = config('xlog.table') ?: 'logs';
+        } else {
+            $this->table = config('xlog.table') ?: 'logs';
+        }
     }
 }
 
