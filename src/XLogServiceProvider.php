@@ -2,6 +2,7 @@
 
 namespace RummyKhan\XLog;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class XLogServiceProvider extends ServiceProvider {
@@ -20,10 +21,11 @@ class XLogServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
-
-        if (! $this->app->routesAreCached() ) {
+        Route::group([
+            'middleware' => 'web'
+        ], function ($router) {
             require __DIR__.'/Http/routes.php';
-        }
+        });
 
         $this->publishes([
             __DIR__ . '/config/xlog.php' => config_path('xlog.php')

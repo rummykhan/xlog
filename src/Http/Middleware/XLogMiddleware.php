@@ -4,7 +4,6 @@ namespace RummyKhan\XLog\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 
 use RummyKhan\XLog\Helpers\Helper;
 use Symfony\Component\HttpFoundation\Response;
