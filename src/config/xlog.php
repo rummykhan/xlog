@@ -25,9 +25,9 @@ return array(
     |
     */
     'routes' => [
-        'index'     => '/admin/logs', // HTTP Method is GET
-        'detail'    => '/admin/logs/{id}', // HTTP Method is GET
-        'delete'    => '/admin/logs/{id}' // HTTP Method is DELETE
+        'index'     => '/admin/logs',       // HTTP Method is GET
+        'detail'    => '/admin/logs/{id}',  // HTTP Method is GET
+        'delete'    => '/admin/logs/{id}'  // HTTP Method is DELETE
     ],
 
     /*
