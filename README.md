@@ -83,7 +83,7 @@ In `xlog.php` you may specify your `routes`. For now there are only three routes
     'delete'    => [ 'route' => '/admin/logs/{id}', 'action' => 'XLogController@delete']        // HTTP Method is DELETE
 ],
 ```
-When changing routes please dont change the wildcard {id} from the routes.
+When changing routes please dont change the wildcard `{id}` from the routes.
 
 #### Log Middleware
 In `xlog.php` you can specify the middleware for you log routes. By default middleware is set to auth.
