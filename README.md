@@ -45,10 +45,11 @@ php artisan geoip:update
  Configure your application logging behavior
 --------------------------------------------
 
+#####The `php artisan vendor:publish` will publish `Log table migration` into migrations folder, `geoip.php` and `xlog.php` in config folder of you laravel installation.
+
 #### Configure Logging Environments
 
-The `php artisan vendor:publish` will publish `Log table migration` into migrations folder, `geoip.php` and `xlog.php` in config folder of you laravel installation.
-In `xlog.php` you can specify your `igonore_environments` as an array e.g.
+In `xlog.php` you can specify your `igonore_environments` as an array, In these environment it will not log any request or response e.g.
 
 ```php
 'ignore_environments' => ['local', 'test'],
@@ -56,19 +57,36 @@ In `xlog.php` you can specify your `igonore_environments` as an array e.g.
 
 #### Configure Logging Connection
 
-The `php artisan vendor:publish` will publish `xlog.php` in config folder of you laravel installation.
-In `xlog.php` you can specify your `connection` as string. This will be the connection where xlog will save all the logs of your application.
-
+In `xlog.php` you can specify your `connection` as string. This connection will be used to save the logs. (By default it uses application connection)
 ```php
-'connection' => 'mysql',
+'connection' => env('DB_CONNECTION')
 ```
-By default it uses application default connection.
+Supported connection types are (sqlite, mysql, pgsql, mongodb).
 
+#### Configure Routes
+In `xlog.php` you can specify your `routes`. For now there are only three routes. 
+    1. Index: where you can see the logs in tabular format using laravel pagination.
+    2. Detail: Where you can see the logs detail.
+    3. Delete: You can delete a log.
+    
+( You can specify you own routes and controllers in case you want to. All you have to do is Call the RummyKhan\XLog\Models\Log Model to get the logs.)
+```php
+'routes' => [
+    'index'     => [ 'route' => '/admin/logs',      'action' => 'XLogController@index'],        // HTTP Method is GET
+    'detail'    => [ 'route' => '/admin/logs/{id}', 'action' => 'XLogController@detail'],       // HTTP Method is GET
+    'delete'    => [ 'route' => '/admin/logs/{id}', 'action' => 'XLogController@delete']        // HTTP Method is DELETE
+],
+```
+When changing routes please dont change the wildcard {id} from the routes.
 
+#### Configure Middleware
+In `xlog.php` you can specify the middleware for you log routes. By default middleware is set to auth.
+```php
+'middleware' => ['auth']
+```
 
-Migrate Log Table (if your connection is mysql)
------------------------------------------------
-
+Migrate Log Table (You don't need to migrate if your database is mongodb.)
+--------------------------------------------------------------------------
 Create Log Table using command:
 
 ```bash
@@ -77,7 +95,6 @@ php artisan migrate
 
 Add Middleware
 --------------
-
 Add `LogginMiddleWare` to your `app\Http\Kernel.php` as a web middleware group:
 
 ```php
@@ -86,5 +103,4 @@ Add `LogginMiddleWare` to your `app\Http\Kernel.php` as a web middleware group:
 
 
 ## MIT Liscense
-
 Laravel rummykhan/xlog is licensed under [The MIT License (MIT)](LICENSE).
