@@ -61,7 +61,7 @@ php artisan migrate
  Configure your application logging behavior
 --------------------------------------------
 
-#####The `php artisan vendor:publish` will publish `Log table migration` into migrations folder, `geoip.php` and `xlog.php` in config folder of you laravel installation.
+The `php artisan vendor:publish` will publish `Log table migration` into migrations folder, `geoip.php` and `xlog.php` in config folder of you laravel installation.
 
 #### Logging Environments
 
@@ -70,6 +70,16 @@ In `xlog.php` you may specify your `igonore_environments` as an array, In these 
 ```php
 'ignore_environments' => ['local', 'test'],
 ```
+
+#### Set Database Type
+
+In `xlog.php` you may specify your `db_type` as string. Since laravel supported databases (mysql, sqlite, pgsql) behaves differently than laravel not supported databases, For that purpose I'm using a `ProxyModel` Which switch the `Eloquent Mode` based on database type.
+E.g. For any laravel supported database you can leave it blank, For mongodb you can set it to 'mongo'.
+
+```php
+'db_type' => 'mongo'
+```
+Supported database types are (sqlite, mysql, pgsql, mongodb).
 
 #### DB Connection
 
