@@ -46,6 +46,18 @@ return array(
 
     /*
     |--------------------------------------------------------------------------
+    | X-log Database Type
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify type of database.
+    | Possible choices are:
+    |       1. mongo (For Mongodb)
+    |       2. You can leave it blank if the database type is supported by laravel (e.g. sqlite, mysql and pgsql etc.).
+    */
+    'db_type' => 'mysql',
+
+    /*
+    |--------------------------------------------------------------------------
     | X-log Database Connection
     |--------------------------------------------------------------------------
     |
