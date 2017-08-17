@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "laravel/framework": "5.4.*",
-        "torann/geoip": "0.2.2",
+        "torann/geoip": "^1.0",
         "jenssegers/agent": "^2.5",
         "jenssegers/mongodb": "^3.2"
     },
@@ -24,7 +24,6 @@
     "extra": {
         "laravel": {
             "providers": [
-              "Torann\\GeoIP\\GeoIPServiceProvider",
               "RummyKhan\\XLog\\XLogServiceProvider"
             ]
         }
