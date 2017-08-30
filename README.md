@@ -77,7 +77,7 @@ In `xlog.php` you may specify your `db_type` as string. Since laravel supported 
 E.g. For any laravel supported database you can leave it blank, For mongodb you can set it to 'mongo'.
 
 ```php
-'db_type' => 'mongo'
+'db_type' => 'mongodb'
 ```
 Supported database types are (sqlite, mysql, pgsql, mongodb).
 
