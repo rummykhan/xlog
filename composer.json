@@ -3,10 +3,10 @@
     "description": "A PHP Laravel package to log all the requests coming to your website",
     "type": "library",
     "require": {
-        "laravel/framework": "5.3.*",
-        "torann/geoip": "0.2.2",
-        "jenssegers/agent": "^2.3",
-        "jenssegers/mongodb": "^3.1"
+        "laravel/framework": "5.4.*",
+        "torann/geoip": "1.0.*",
+        "jenssegers/agent": "^2.5",
+        "jenssegers/mongodb": "^3.2"
     },
     "license": "MIT",
     "authors": [
@@ -20,5 +20,12 @@
             "RummyKhan\\XLog\\" : "src/"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "extra": {
+        "laravel": {
+            "providers": [
+              "RummyKhan\\XLog\\XLogServiceProvider"
+            ]
+        }
+    }
 }

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Jenssegers\Agent\Agent;
-use Torann\GeoIP\GeoIPFacade;
+use Torann\GeoIP\Facades\GeoIP;
 
 class Helper
 {
@@ -127,7 +127,7 @@ class Helper
         $log['os']                    =   $platform;
         $log['os_version']            =   $agent->version($platform);
 
-        $location                   = GeoIPFacade::getLocation($log['ip']);
+        $location                   = GeoIP::getLocation($log['ip']);
 
         if(isset($location['country']))
             $log['country']           = $location['country'];
